@@ -9,4 +9,5 @@ prints out the top of the stack
 removes element at top of stack
 # task 3: swap
 swaps the top 2 elements in the stack
-# task 4: adds the top two elements on th stack and replaces the top with the result
+# task 4: add
+adds the top two elements on th stack and replaces the top with the result
