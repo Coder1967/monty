@@ -1,14 +1,26 @@
 #include "monty.h"
 
 extern int value;
-
+/**
+ * push - adds a new element to the stack
+ * @stack: address of the pointer to top of stack
+ * @l: current line
+ */
 void push(stack_t **stack, unsigned int l)
 {
 	stack_t *new = (stack_t *) malloc(sizeof(stack_t));
-	
+
+	if (new == NULL)
+	{
+		free(new);
+		fprintf(stderr, "Error: malloc failed\n");
+		free_stack(stack);
+		exit(EXIT_FAILURE);
+	}
 	if (value == -24790538)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", l);
+		free_stack(stack);
 		exit(EXIT_FAILURE);
 	}
 	new->n = value;
@@ -17,7 +29,11 @@ void push(stack_t **stack, unsigned int l)
 	*stack = new;
 	return;
 }
-
+/**
+ * pop - removes element at top of stack
+ * @stack: address to pointer to top of stack
+ * @l: current line number
+ */
 void pop(stack_t **stack, unsigned int l)
 {
 	stack_t *tmp;
@@ -31,7 +47,11 @@ void pop(stack_t **stack, unsigned int l)
 	*stack = tmp->next;
 	free(tmp);
 }
-
+/**
+ * pall - prints all elements in a stack
+ * @stack: address to pointer to top of stack
+ * @l: current line number
+ */
 void pall(stack_t **stack, unsigned int l)
 {
 	stack_t *tmp = *stack;
@@ -46,7 +66,11 @@ void pall(stack_t **stack, unsigned int l)
 		tmp = tmp->next;
 	}
 }
-
+/**
+ * pint - prints the lement at top of stack
+ * @stack: address to pointer to top of stack
+ * @l: current line number
+ */
 void pint(stack_t **stack, unsigned int l)
 {
 	(void) l;
@@ -54,9 +78,13 @@ void pint(stack_t **stack, unsigned int l)
      {
 	     return;
      }
-     printf("%d\n",(*stack)->n);
+     printf("%d\n", (*stack)->n);
 }
-
+/**
+ * nop - does nothing
+ * @stack: address of pointer to stack top
+ * @l: current line in file being read
+ */
 void nop(stack_t **stack, unsigned int l)
 {
 	(void) l;

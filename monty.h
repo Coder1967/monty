@@ -1,5 +1,8 @@
 #ifndef MAIN_H
 #define MAIN_H
+
+#include <stdio.h>
+#include <stdlib.h>
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -8,14 +11,19 @@
  * Description: doubly linked list node structure
  * for stack, queues, LIFO, FIFO
  */
-#include <stdio.h>
-#include <stdlib.h>
+
+
 typedef struct stack_s
 {
 	int n;
 	struct stack_s *prev;
 	struct stack_s *next;
 } stack_t;
+
+void div(stack_t **stack, unsigned int l);
+void mul(stack_t **stack, unsigned int l);
+void sub(stack_t **stack, unsigned int l);
+void free_stack(stack_t **stack);
 void compare(char *str, unsigned int l, stack_t **stack);
 void push(stack_t **stack, unsigned int l);
 void pop(stack_t **stack, unsigned int l);

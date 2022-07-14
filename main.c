@@ -28,6 +28,7 @@ int main(int argc, char *argv[])
 	}
 	funct_caller(file, buffer, stack);
 	free(buffer);
+	free_stack(&stack);
 	return (0);
 }
 /**
@@ -90,28 +91,27 @@ void funct_caller(FILE *file, char *buffer, stack_t *stack)
 void compare(char *str, unsigned int l, stack_t **stack)
 {
 	 int i;
+	 unsigned int len = strlen(str);
 	 instruction_t inst[] = {
 		 {"nop", nop},
 		 {"push", push},
 		 {"pall", pall},
 		 {"pint", pint},
+		 {"sub", sub},
+		 {"div", div},
+		 {"mul", mul},
 	{"pop", pop},
 		 {"swap", swap},
 		 {"add", add}
 	 };
 
 	 i = 0;
-	 if (str[0] == '\n')
+	 if (str[0] == '\n' || str[0] == '#' || str[0] == '\0')
 		 return;
 
 	while (i < 7)
 	{
-		if (strncmp(str, inst[i].opcode, 4) == 0)
-		{
-			inst[i].f(stack, l);
-			return;
-		}
-		else if (strncmp(str, inst[i].opcode, 3) == 0)
+		if (strncmp(str, inst[i].opcode, len) == 0)
 		{
 			inst[i].f(stack, l);
 			return;
