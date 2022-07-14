@@ -101,7 +101,7 @@ void compare(char *str, unsigned int l, stack_t **stack)
 	 };
 
 	 i = 0;
-	 if (str == '\0')
+	 if (str[0] == '\n')
 		 return;
 
 	while (i < 7)
