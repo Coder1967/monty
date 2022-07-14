@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 /**
  * sub - subtracts top of stack from second top of stack
  * @stack: address of pointer to top of stack
@@ -44,7 +44,7 @@ void mul(stack_t **stack, unsigned int l)
  * @stack: address to pointer to top of stack
  * @l: current line in file
  */
-void div(stack_t **stack, unsigned int l)
+void fdiv(stack_t **stack, unsigned int l)
 {
 	stack_t *tmp = *stack;
 	int res;

@@ -20,11 +20,11 @@ typedef struct stack_s
 	struct stack_s *next;
 } stack_t;
 
-void div(stack_t **stack, unsigned int l);
+void compare(char *str, unsigned int l, stack_t **stack);
+void fdiv(stack_t **stack, unsigned int l);
 void mul(stack_t **stack, unsigned int l);
 void sub(stack_t **stack, unsigned int l);
 void free_stack(stack_t **stack);
-void compare(char *str, unsigned int l, stack_t **stack);
 void push(stack_t **stack, unsigned int l);
 void pop(stack_t **stack, unsigned int l);
 void pall(stack_t **stack, unsigned int l);

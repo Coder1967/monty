@@ -91,14 +91,13 @@ void funct_caller(FILE *file, char *buffer, stack_t *stack)
 void compare(char *str, unsigned int l, stack_t **stack)
 {
 	 int i;
-	 unsigned int len = strlen(str);
 	 instruction_t inst[] = {
 		 {"nop", nop},
 		 {"push", push},
 		 {"pall", pall},
 		 {"pint", pint},
 		 {"sub", sub},
-		 {"div", div},
+		 {"div", fdiv},
 		 {"mul", mul},
 	{"pop", pop},
 		 {"swap", swap},
@@ -109,9 +108,14 @@ void compare(char *str, unsigned int l, stack_t **stack)
 	 if (str[0] == '\n' || str[0] == '#' || str[0] == '\0')
 		 return;
 
-	while (i < 7)
+	while (i < 10)
 	{
-		if (strncmp(str, inst[i].opcode, len) == 0)
+		if (strncmp(str, inst[i].opcode, 4) == 0)
+		{
+			inst[i].f(stack, l);
+			return;
+		}
+		else if (strncmp(str, inst[i].opcode, 3) == 0)
 		{
 			inst[i].f(stack, l);
 			return;
