@@ -23,5 +23,6 @@ void add(stack_t **stack, unsigned int l)
 		exit(EXIT_FAILURE);
 	}
 	res = tmp->n + tmp->next->n;
-	tmp->n = res;
+	pop(stack, l);
+	tmp->next->n = res;
 }
