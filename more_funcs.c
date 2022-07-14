@@ -11,6 +11,7 @@ void swap(stack_t **stack, unsigned int l)
 
 	if (tmp == NULL || tmp->next == NULL)
 	{
+		fclose(info.file_ptr);
 		fprintf(stderr, "L%u: can't swap, stack too short\n", l);
 		free_stack(stack);
 		exit(EXIT_FAILURE);
@@ -31,6 +32,7 @@ void add(stack_t **stack, unsigned int l)
 
 	if (tmp == NULL || tmp->next == NULL)
 	{
+		fclose(info.file_ptr);
 		fprintf(stderr, "L%u: can't add, stack too short\n", l);
 		free_stack(stack);
 		exit(EXIT_FAILURE);

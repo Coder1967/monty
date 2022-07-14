@@ -9,13 +9,15 @@
  * Return: 0(on success)
  */
 
-int value;
+extra_info info;
+
 int main(int argc, char *argv[])
 {
-	char *buffer = (char *) malloc(80 * sizeof(char));
+	char buffer[100];
 	stack_t *stack = NULL;
 	FILE *file = fopen(argv[1], "r");
 
+	info.file_ptr = file;
 	if (argc == 1)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
@@ -29,7 +31,6 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	funct_caller(file, buffer, stack);
-	free(buffer);
 	free_stack(&stack);
 	fclose(file);
 	return (0);
@@ -38,7 +39,7 @@ int main(int argc, char *argv[])
  * funct_caller - reads contents of file for
  * monty codes then passes it to the copare function
  * @file: pointer to the file stream
- * @buffer: dynamically allocated memory
+ * @buffer: string with file contents
  * @stack: pointer to the op of the stack
  */
 void funct_caller(FILE *file, char *buffer, stack_t *stack)
@@ -75,10 +76,11 @@ void funct_caller(FILE *file, char *buffer, stack_t *stack)
 			i++;
 		}
 		if (check == 0)
-			value = -486796987;
+			info.isnum = 0;
 		else
 		{
-			value = atoi(st);
+			info.value = atoi(st);
+			info.isnum = 1;
 		}
 		compare(str, l, &stack);
 		l++;
@@ -96,6 +98,7 @@ void compare(char *str, unsigned int l, stack_t **stack)
 	 int i;
 	 instruction_t inst[] = {
 		 {"nop", nop},
+		 {"push", push},
 		 {"pall", pall},
 		 {"pint", pint},
 		 {"sub", sub},
@@ -112,7 +115,7 @@ void compare(char *str, unsigned int l, stack_t **stack)
 	 if (str[0] == '\n' || str[0] == '#')
 		 return;
 
-	while (i < 11)
+	while (i < 12)
 	{
 		if (strncmp(str, inst[i].opcode, 4) == 0)
 		{

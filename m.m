@@ -1,3 +1,3 @@
-push 10
-push 676
+push 'u' 
+push 67
 pchar
