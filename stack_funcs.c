@@ -60,7 +60,7 @@ void pint(stack_t **stack, unsigned int l)
 void nop(stack_t **stack, unsigned int l)
 {
 	(void) l;
-	(void) *stack;
+	(void) stack;
 	return;
 }
 
