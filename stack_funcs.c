@@ -45,7 +45,6 @@ void pop(stack_t **stack, unsigned int l)
 	}
 	tmp = *stack;
 	*stack = tmp->next;
-	(*stack)->prev = NULL;
 	free(tmp);
 }
 /**
