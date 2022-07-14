@@ -77,7 +77,6 @@ void pint(stack_t **stack, unsigned int l)
      if (*stack == NULL)
      {
 	     fprintf(stderr, "L%u: can't pint, stack empty", l);
-	     fclose(c.f);
 	     exit(EXIT_FAILURE);
      }
      printf("%d\n", (*stack)->n);

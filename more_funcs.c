@@ -13,7 +13,6 @@ void swap(stack_t **stack, unsigned int l)
 	{
 		fprintf(stderr, "L%u: can't swap, stack too short\n", l);
 		free_stack(stack);
-		fclose(c.f);
 		exit(EXIT_FAILURE);
 	}
 	temp = tmp->n;
@@ -34,7 +33,6 @@ void add(stack_t **stack, unsigned int l)
 	{
 		fprintf(stderr, "L%u: can't add, stack too short\n", l);
 		free_stack(stack);
-		fclose(c.f);
 		exit(EXIT_FAILURE);
 	}
 	res = tmp->n + tmp->next->n;

@@ -13,7 +13,6 @@ void sub(stack_t **stack, unsigned int l)
 	{
 		fprintf(stderr, "L%u: can't sub, stack too short\n", l);
 		free_stack(stack);
-		fclose(c.f);
 		exit(EXIT_FAILURE);
 	}
 	res = tmp->next->n - tmp->n;
@@ -34,7 +33,6 @@ void mul(stack_t **stack, unsigned int l)
 	 {
 		 fprintf(stderr, "L%u: can't mul, stack too short\n", l);
 		 free_stack(stack);
-		 fclose(c.f);
 		 exit(EXIT_FAILURE);
 	 }
 	 res = tmp->n * tmp->next->n;
@@ -55,7 +53,6 @@ void fdiv(stack_t **stack, unsigned int l)
 	{
 		fprintf(stderr, "L%u: can't div, stack too short\n", l);
 		free_stack(stack);
-		fclose(c.f);
 		exit(EXIT_FAILURE);
 	}
 	res = tmp->next->n / tmp->n;
@@ -77,7 +74,6 @@ void mod(stack_t **stack, unsigned int l)
          {
                  fprintf(stderr, "L%u: can't mod, stack too short\n", l);
                  free_stack(stack);
-                 fclose(c.f);
                  exit(EXIT_FAILURE);
          }
          res = tmp->next->n % tmp->n;
@@ -95,13 +91,12 @@ void pchar(stack_t **stack, unsigned int l)
      if (*stack == NULL)
      {
              fprintf(stderr, "L%u: can't pchar, stack empty\n", l);
-             fclose(c.f);
              exit(EXIT_FAILURE);
      }
      if ((*stack)->n < 0 || (*stack)->n > 127)
      {
 	     fprintf(stderr, "L%u: can't pchar, value out of range\n", l);
-             fclose(c.f);
+	     free_stack(stack);
              exit(EXIT_FAILURE);
      }
      printf("%c\n", (*stack)->n);
