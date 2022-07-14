@@ -1,8 +1,3 @@
-
-      #                good
-push 3
-push 25
-push 5
-pall
-div
-pall
+push 10
+push 676
+pchar

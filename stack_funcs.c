@@ -1,6 +1,5 @@
 #include "monty.h"
 
-extern int value;
 /**
  * push - adds a new element to the stack
  * @stack: address of the pointer to top of stack
@@ -15,15 +14,17 @@ void push(stack_t **stack, unsigned int l)
 		free(new);
 		fprintf(stderr, "Error: malloc failed\n");
 		free_stack(stack);
+		fclose(c.f);
 		exit(EXIT_FAILURE);
 	}
-	if (value == -24790538)
+	if (c.yes == 0)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", l);
 		free_stack(stack);
+		 fclose(c.f);
 		exit(EXIT_FAILURE);
 	}
-	new->n = value;
+	new->n = c.value;
 	new->next = *stack;
 	new->prev = NULL;
 	*stack = new;
@@ -45,6 +46,7 @@ void pop(stack_t **stack, unsigned int l)
 	}
 	tmp = *stack;
 	*stack = tmp->next;
+	(*stack)->prev = NULL;
 	free(tmp);
 }
 /**
@@ -73,10 +75,11 @@ void pall(stack_t **stack, unsigned int l)
  */
 void pint(stack_t **stack, unsigned int l)
 {
-	(void) l;
      if (*stack == NULL)
      {
-	     return;
+	     fprintf(stderr, "L%u: can't pint, stack empty", l);
+	     fclose(c.f);
+	     exit(EXIT_FAILURE);
      }
      printf("%d\n", (*stack)->n);
 }

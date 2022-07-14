@@ -2,13 +2,14 @@
 #include <stddef.h>
 #include <string.h>
 
-int value;
 /**
  * main - the main function
  * @argc: counts arguments passed from terminal
  * @argv: an array of strings passed to the terminal
  * Return: 0(on success)
  */
+
+closed c;
 int main(int argc, char *argv[])
 {
 	char *buffer = (char *) malloc(80 * sizeof(char));
@@ -20,15 +21,18 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
+	c.f = file;
 
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		fclose(file);
 		exit(EXIT_FAILURE);
 	}
 	funct_caller(file, buffer, stack);
 	free(buffer);
 	free_stack(&stack);
+	fclose(file);
 	return (0);
 }
 /**
@@ -72,10 +76,11 @@ void funct_caller(FILE *file, char *buffer, stack_t *stack)
 			i++;
 		}
 		if (check == 0)
-			value = -24790538;
+			c.yes = 0;
 		else
 		{
-			value = atoi(st);
+			c.yes = 1;
+			c.value = atoi(st);
 		}
 		compare(str, l, &stack);
 		l++;
@@ -101,21 +106,23 @@ void compare(char *str, unsigned int l, stack_t **stack)
 		 {"mul", mul},
 	{"pop", pop},
 		 {"swap", swap},
-		 {"add", add}
+		 {"add", add},
+		 {"mod", mod},
+		 {"pchar", pchar}
 	 };
 
 	 i = 0;
 	 if (str[0] == '\n' || str[0] == '#')
 		 return;
 
-	while (i < 10)
+	while (i < 12)
 	{
 		if (strncmp(str, inst[i].opcode, 4) == 0)
 		{
 			inst[i].f(stack, l);
 			return;
 		}
-		else if (strncmp(str, inst[i].opcode, 3) == 0)
+		else if (strncmp(str, inst[i].opcode, 3) == 0 || strncmp(str, inst[i].opcode, 5) == 0)
 		{
 			inst[i].f(stack, l);
 			return;

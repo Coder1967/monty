@@ -12,6 +12,13 @@
  * for stack, queues, LIFO, FIFO
  */
 
+typedef struct close
+{
+	FILE *f;
+	int yes;
+	int value;
+} closed;
+extern closed c;
 
 typedef struct stack_s
 {
@@ -20,6 +27,8 @@ typedef struct stack_s
 	struct stack_s *next;
 } stack_t;
 
+void mod(stack_t **stack, unsigned int l);
+void pchar(stack_t **stack, unsigned int l);
 void compare(char *str, unsigned int l, stack_t **stack);
 void fdiv(stack_t **stack, unsigned int l);
 void mul(stack_t **stack, unsigned int l);
