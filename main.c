@@ -96,7 +96,6 @@ void compare(char *str, unsigned int l, stack_t **stack)
 	 int i;
 	 instruction_t inst[] = {
 		 {"nop", nop},
-		 {"push", push},
 		 {"pall", pall},
 		 {"pint", pint},
 		 {"sub", sub},
@@ -113,7 +112,7 @@ void compare(char *str, unsigned int l, stack_t **stack)
 	 if (str[0] == '\n' || str[0] == '#')
 		 return;
 
-	while (i < 12)
+	while (i < 11)
 	{
 		if (strncmp(str, inst[i].opcode, 4) == 0)
 		{

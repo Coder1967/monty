@@ -6,7 +6,7 @@
  * @l: current line
  */
 extern int value;
-void push(stack_t **stack, unsigned int l)
+/*void push(stack_t **stack, unsigned int l)
 {
 	stack_t *new = (stack_t *) malloc(sizeof(stack_t));
 
@@ -28,7 +28,7 @@ void push(stack_t **stack, unsigned int l)
 	new->prev = NULL;
 	*stack = new;
 	return;
-}
+}*/
 /**
  * pop - removes element at top of stack
  * @stack: address to pointer to top of stack
