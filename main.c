@@ -9,7 +9,7 @@
  * Return: 0(on success)
  */
 
-closed c;
+int value;
 int main(int argc, char *argv[])
 {
 	char *buffer = (char *) malloc(80 * sizeof(char));
@@ -76,11 +76,10 @@ void funct_caller(FILE *file, char *buffer, stack_t *stack)
 			i++;
 		}
 		if (check == 0)
-			c.yes = 0;
+			value = -486796987;
 		else
 		{
-			c.yes = 1;
-			c.value = atoi(st);
+			value = atoi(st);
 		}
 		compare(str, l, &stack);
 		l++;

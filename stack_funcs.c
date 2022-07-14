@@ -5,6 +5,7 @@
  * @stack: address of the pointer to top of stack
  * @l: current line
  */
+extern int value;
 void push(stack_t **stack, unsigned int l)
 {
 	stack_t *new = (stack_t *) malloc(sizeof(stack_t));
@@ -14,17 +15,15 @@ void push(stack_t **stack, unsigned int l)
 		free(new);
 		fprintf(stderr, "Error: malloc failed\n");
 		free_stack(stack);
-		fclose(c.f);
 		exit(EXIT_FAILURE);
 	}
-	if (c.yes == 0)
+	if (value == -486796987)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", l);
 		free_stack(stack);
-		 fclose(c.f);
 		exit(EXIT_FAILURE);
 	}
-	new->n = c.value;
+	new->n = value;
 	new->next = *stack;
 	new->prev = NULL;
 	*stack = new;

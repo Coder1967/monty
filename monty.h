@@ -12,13 +12,6 @@
  * for stack, queues, LIFO, FIFO
  */
 
-typedef struct close
-{
-	FILE *f;
-	int yes;
-	int value;
-} closed;
-extern closed c;
 
 typedef struct stack_s
 {
