@@ -63,7 +63,6 @@ void arg_sort(char buf[], unsigned int line_number, stack_t **stack)
 
 	strcpy(buffer, buf);
 	arg1 = strtok(buffer, delim);
-
 	if (strcmp(arg1, "push") == 0)
 	{
 		is_a_num(buf);
@@ -82,10 +81,12 @@ void func_caller(char *argument1, unsigned int line_number, stack_t **stack)
 	int i = 0;
 	instruction_t instructs[] = {
 		{"pall", pall},
+		{"pop", pop},
+		{"pint", pint},
 		{"push", push}
 	};
 
-	while (i < 2)
+	while (i < 4)
 	{
 		if (strcmp(argument1, instructs[i].opcode) == 0)
 		{

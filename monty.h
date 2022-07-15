@@ -37,6 +37,7 @@ typedef struct stack_s
 	struct stack_s *next;
 } stack_t;
 
+void pint(stack_t **stack, unsigned int line_num);
 void push(stack_t **stack, unsigned int l);
 void pall(stack_t **stack, unsigned int l);
 void file_reader(void);
@@ -44,7 +45,7 @@ void arg_sort(char *buf, unsigned int line_number, stack_t **stack);
 void func_caller(char *argument1, unsigned int line_number, stack_t **stack);
 void is_a_num(char *argument2);
 void free_stack(stack_t **stack);
-
+void pop(stack_t **stack, unsigned int line_num);
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
