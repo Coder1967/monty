@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 
 	if (file == NULL)
 	{
-		fprintf(stderr, "Error: Can't open file %s", argv[1]);
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	info.fileo = file;
@@ -92,7 +92,7 @@ void func_caller(char *argument1, unsigned int line_number, stack_t **stack)
 		}
 		i++;
 	}
-	fprintf(stderr, "L%u: unknown instruction %s", line_number, argument1);
+	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, argument1);
 	free_stack(stack);
 	fclose(info.fileo);
 	exit(EXIT_FAILURE);
