@@ -1,10 +1,10 @@
 #include "monty.h"
 
 /**
- * infos info - varaible of type struct info
+ * info - varaible of type struct infos
  */
 
-infos info;
+infos info = {0, 0, NULL};
 
 /**
  * main - main function
@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 /**
  * file_reader - reads file passed during file execution
  */
-void file_reader()
+void file_reader(void)
 {
 	stack_t *stack = NULL;
 	unsigned int line_number = 1;
@@ -47,12 +47,13 @@ void file_reader()
 		line_number++;
 	}
 	free_stack(&stack);
-        fclose(info.fileo);
+	fclose(info.fileo);
 }
 /**
  * arg_sort - organizes the opcodes
  * @buf: line of string from file
  * @line_number: current line number in file
+ * @stack: address to pointer to top of stack
  */
 void arg_sort(char buf[], unsigned int line_number, stack_t **stack)
 {
@@ -72,6 +73,7 @@ void arg_sort(char buf[], unsigned int line_number, stack_t **stack)
 /**
  * func_caller - scans the opcode from the
  * file and calls the appropriate function
+ * @stack: address to pointer to top of stack
  * @argument1: opcode from file
  * @line_number: current line number in file
  */
