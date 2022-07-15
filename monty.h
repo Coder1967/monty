@@ -49,6 +49,8 @@ void is_a_num(char *argument2);
 void free_stack(stack_t **stack);
 void pop(stack_t **stack, unsigned int line_num);
 void sub(stack_t **stack, unsigned int line_num);
+void mul(stack_t **stack, unsigned int line_num);
+void divide(stack_t **stack, unsigned int line_num);
 void nop(stack_t **stack, unsigned int line_num);
 /**
  * struct instruction_s - opcode and its function
