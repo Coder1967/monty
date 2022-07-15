@@ -1,136 +1,99 @@
 #include "monty.h"
-#include <stddef.h>
-#include <string.h>
 
 /**
- * main - the main function
- * @argc: counts arguments passed from terminal
- * @argv: an array of strings passed to the terminal
- * Return: 0(on success)
+ * infos info - varaible of type struct info
  */
 
-extra_info info;
+infos info;
 
-int main(int argc, char *argv[])
+/**
+ * main - main function
+ * @argc: number of arguments passed when executing file
+ * @argv: arguments passed during file's execution
+ * Return: 0(on success)
+ */
+int main(int argc, char **argv)
 {
-	char buffer[100];
-	stack_t *stack = NULL;
-	FILE *file = fopen(argv[1], "r");
+	FILE *file;
 
-	info.file_ptr = file;
 	if (argc == 1)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
+	file = fopen(argv[1], "r");
 
 	if (file == NULL)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		fclose(file);
+		fprintf(stderr, "Error: Can't open file %s", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	funct_caller(file, buffer, stack);
-	free_stack(&stack);
-	fclose(file);
+	info.fileo = file;
+	file_reader();
 	return (0);
 }
 /**
- * funct_caller - reads contents of file for
- * monty codes then passes it to the copare function
- * @file: pointer to the file stream
- * @buffer: string with file contents
- * @stack: pointer to the op of the stack
+ * file_reader - reads file passed during file execution
  */
-void funct_caller(FILE *file, char *buffer, stack_t *stack)
+void file_reader()
 {
-	unsigned int i, j, k, check, check1, check2, l = 1;
-	char str[25], st[28];
+	stack_t *stack = NULL;
+	unsigned int line_number = 1;
+	char buffer[1024];
 
-	while (fgets(buffer, 40, file))
+	while (fgets(buffer, 1024, info.fileo))
 	{
-		i = check = check1 = check2 = j = k = 0;
-		while (i < strlen(buffer))
-		{
-			if (buffer[i] != ' ' && check1 == 0)
-			{
-				str[j] = buffer[i];
-				str[j + 1] = '\0';
-				if (buffer[i + 1] == ' ')
-				{
-					check1 = 1;
-				}
-				j++;
-			}
-			if (buffer[i] >= 48 && buffer[i] <= 57 && check2 == 0)
-			{
-				st[k] = buffer[i];
-				st[k + 1] = '\0';
-				if (buffer[i + 1] == ' ')
-				{
-					check2 = 1;
-				}
-				check++;
-				k++;
-			}
-			i++;
-		}
-		if (check == 0)
-			info.isnum = 0;
-		else
-		{
-			info.value = atoi(st);
-			info.isnum = 1;
-		}
-		compare(str, l, &stack);
-		l++;
+		arg_sort(buffer, line_number, &stack);
+		line_number++;
 	}
+	free_stack(&stack);
+        fclose(info.fileo);
 }
-
 /**
- * compare - checks if the string from the file matches any function
- * @str: string from file
- * @l: current line
- * @stack: pointer to top node on the stack
+ * arg_sort - organizes the opcodes
+ * @buf: line of string from file
+ * @line_number: current line number in file
  */
-void compare(char *str, unsigned int l, stack_t **stack)
+void arg_sort(char buf[], unsigned int line_number, stack_t **stack)
 {
-	 int i;
-	 instruction_t inst[] = {
-		 {"nop", nop},
-		 {"push", push},
-		 {"pall", pall},
-		 {"pint", pint},
-		 {"sub", sub},
-		 {"div", fdiv},
-		 {"mul", mul},
-	{"pop", pop},
-		 {"swap", swap},
-		 {"add", add},
-		 {"mod", mod},
-		 {"pchar", pchar}
-	 };
+	char delim[] = " \n";
+	char buffer[1024];
+	char *arg1;
 
-	 i = 0;
-	 if (str[0] == '\n' || str[0] == '#')
-		 return;
+	strcpy(buffer, buf);
+	arg1 = strtok(buffer, delim);
 
-	while (i < 12)
+	if (strcmp(arg1, "push") == 0)
 	{
-		if (strncmp(str, inst[i].opcode, 4) == 0)
+		is_a_num(buf);
+	}
+	func_caller(arg1, line_number, stack);
+}
+/**
+ * func_caller - scans the opcode from the
+ * file and calls the appropriate function
+ * @argument1: opcode from file
+ * @line_number: current line number in file
+ */
+void func_caller(char *argument1, unsigned int line_number, stack_t **stack)
+{
+	int i = 0;
+	instruction_t instructs[] = {
+		{"pall", pall},
+		{"push", push}
+	};
+
+	while (i < 2)
+	{
+		if (strcmp(argument1, instructs[i].opcode) == 0)
 		{
-			inst[i].f(stack, l);
-			return;
-		}
-		else if (strncmp(str, inst[i].opcode, 3) == 0 || strncmp(str, inst[i].opcode, 5) == 0)
-		{
-			inst[i].f(stack, l);
+			instructs[i].f(stack, line_number);
 			return;
 		}
 		i++;
 	}
-	fprintf(stderr, "L%u: unknown instruction %s\n", l, str);
+	fprintf(stderr, "L%u: unknown instruction %s", line_number, argument1);
+	free_stack(stack);
+	fclose(info.fileo);
 	exit(EXIT_FAILURE);
 }
-
-

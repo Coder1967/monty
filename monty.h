@@ -2,7 +2,24 @@
 #define MAIN_H
 
 #include <stdio.h>
+#include <stdbool.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+/**
+ * struct figures - a bunch of necessary infos
+ * @is_digit: checks if string are digits
+ * @value: the number to be pushed(works only if is_digit is true)
+ * @fileo: stores pointer to opened file
+ */
+typedef struct figures
+{
+	bool is_digit;
+	int value;
+	FILE *fileo;
+} infos;
+
+extern infos info;
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -20,21 +37,14 @@ typedef struct stack_s
 	struct stack_s *next;
 } stack_t;
 
-void mod(stack_t **stack, unsigned int l);
-void pchar(stack_t **stack, unsigned int l);
-void compare(char *str, unsigned int l, stack_t **stack);
-void fdiv(stack_t **stack, unsigned int l);
-void mul(stack_t **stack, unsigned int l);
-void sub(stack_t **stack, unsigned int l);
-void free_stack(stack_t **stack);
 void push(stack_t **stack, unsigned int l);
-void pop(stack_t **stack, unsigned int l);
 void pall(stack_t **stack, unsigned int l);
-void pint(stack_t **stack, unsigned int l);
-void nop(stack_t **stack, unsigned int l);
-void swap(stack_t **stack, unsigned int l);
-void add(stack_t **stack, unsigned int l);
-void funct_caller(FILE *file, char *buffer, stack_t *stack);
+void file_reader(void);
+void arg_sort(char *buf, unsigned int line_number, stack_t **stack);
+void func_caller(char *argument1, unsigned int line_number, stack_t **stack);
+void is_a_num(char *argument2);
+void free_stack(stack_t **stack);
+
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
@@ -47,11 +57,4 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-typedef struct information
-{
-	int isnum;
-	int value;
-	FILE *file_ptr;
-} extra_info;
-extern extra_info info;
 #endif
