@@ -5,15 +5,19 @@
  */
 void is_a_num(char *argument2)
 {
+	char *arg1 = strtok(argument2, " \n");
+	char *arg2 = strtok(NULL, " \n");
 	char str[25];
 	int i = 0;
+	int len = strlen(arg2);
 	int check_for_num = 0, j = 0;
 
-	while (argument2[i] != '\0')
+	(void) arg1;
+	while (arg2[i] != '\0')
 	{
-		if (isdigit(argument2[i]))
+		if (isdigit(arg2[i]))
 		{
-			str[j] = argument2[i];
+			str[j] = arg2[i];
 			check_for_num++;
 			j++;
 		}
@@ -21,7 +25,7 @@ void is_a_num(char *argument2)
 	}
 	str[j] = '\0';
 
-	if (check_for_num > 0)
+	if (check_for_num == len)
 	{
 		info.is_digit = true;
 		info.value = atoi(str);
