@@ -85,10 +85,12 @@ void func_caller(char *argument1, unsigned int line_number, stack_t **stack)
 		{"pint", pint},
 		{"add", add},
 		{"swap", swap},
-		{"push", push}
+		{"push", push},
+		{"nop", nop},
+		{"sub", sub}
 	};
 
-	while (i < 6)
+	while (i < 8)
 	{
 		if (strcmp(argument1, instructs[i].opcode) == 0)
 		{
