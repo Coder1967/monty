@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 {
 	FILE *file;
 
-	if (argc == 1)
+	if (argc == 1 || argc > 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
@@ -56,7 +56,7 @@ void file_reader()
  */
 void arg_sort(char buf[], unsigned int line_number, stack_t **stack)
 {
-	char delim[] = " \n";
+	char delim[] = " \n\t";
 	char buffer[1024];
 	char *arg1;
 

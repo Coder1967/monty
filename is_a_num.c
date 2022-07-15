@@ -5,8 +5,8 @@
  */
 void is_a_num(char *argument2)
 {
-	char *arg1 = strtok(argument2, " \n");
-	char *arg2 = strtok(NULL, " \n");
+	char *arg1 = strtok(argument2, " \n\t");
+	char *arg2 = strtok(NULL, " \n\t");
 	char str[25];
 	int i = 0;
 	int len = strlen(arg2);
