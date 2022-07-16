@@ -24,3 +24,25 @@ void pstr(stack_t **stack, unsigned int line_num)
 	}
 	putchar('\n');
 }
+/**
+ * rotl - prints out string using ascci chars of the numbers in stack
+ * @stack: address of pointer to top of stack
+ * @line_num: current line number
+ */
+
+void rotl(stack_t **stack, unsigned int line_num)
+{
+	int tmp1 = 0;
+	stack_t *tmp2 = *stack;
+
+	(void)line_num;
+	if (*stack == NULL)
+		return;
+	tmp1 = tmp2->n;
+	while (tmp2->next != NULL)
+	{
+		tmp2->n = tmp2->next->n;
+		tmp2 = tmp2->next;
+	}
+	tmp2->n = tmp1;
+}
