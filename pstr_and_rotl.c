@@ -25,7 +25,7 @@ void pstr(stack_t **stack, unsigned int line_num)
 	putchar('\n');
 }
 /**
- * rotl - prints out string using ascci chars of the numbers in stack
+ * rotl - puts the top of stack at the last and the second at the top
  * @stack: address of pointer to top of stack
  * @line_num: current line number
  */

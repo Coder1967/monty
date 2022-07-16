@@ -93,11 +93,12 @@ void func_caller(char *argument1, unsigned int line_number, stack_t **stack)
 		{"mod", mod},
 		{"pchar", pchar},
 		{"rotl", rotl},
+		{"rotr", rotr},
 		{"pstr", pstr}
 	};
 	if (*argument1 == '#')
 		return;
-	while (i < 14)
+	while (i < 15)
 	{
 		if (strcmp(argument1, instructs[i].opcode) == 0)
 		{
