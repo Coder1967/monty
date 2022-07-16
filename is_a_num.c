@@ -15,7 +15,7 @@ void is_a_num(char *argument2)
 	(void) arg1;
 	while (arg2[i] != '\0')
 	{
-		if (isdigit(arg2[i]))
+		if (isdigit(arg2[i]) || (arg2[i] == '-' && isdigit(arg2[i + 1])))
 		{
 			str[j] = arg2[i];
 			check_for_num++;

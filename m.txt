@@ -1,5 +1,0 @@
-nop
-push 5
-push r
-pall
-
