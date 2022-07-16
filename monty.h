@@ -53,6 +53,7 @@ void mul(stack_t **stack, unsigned int line_num);
 void divide(stack_t **stack, unsigned int line_num);
 void nop(stack_t **stack, unsigned int line_num);
 void mod(stack_t **stack, unsigned int line_num);
+void pchar(stack_t **stack, unsigned int line_num);
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
